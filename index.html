@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f6b5c">
+<title>Life Basics: NC Life Agent exam study guide</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230f6b5c%22/%3E%3Ctext x=%2216%22 y=%2221%22 font-size=%2214%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22 font-weight=%22bold%22%3ELB%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f5f6f8; --card:#ffffff; --ink:#141b2d; --muted:#555e70; --line:#e2e5eb;
+  --accent:#0f6b5c; --accent-soft:#e3f3ef; --accent-ink:#ffffff;
+  --good:#146c3f; --good-bg:#e5f5ec; --bad:#a61b12; --bad-bg:#fcebe9;
+  --gold:#b07800; --gold-bg:#fff4d6; --shadow:0 1px 2px rgba(20,27,45,.06),0 4px 16px rgba(20,27,45,.06);
+  --radius:14px; --navh:64px;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1420;--card:#171e2e;--ink:#e8ebf2;--muted:#a3abbd;--line:#2a3347;--accent:#5fd3b8;--accent-soft:#12302a;--accent-ink:#0f1420;
+  --good:#5fd39a;--good-bg:#12301f;--bad:#ff8a80;--bad-bg:#3a1714;--gold:#f2c14e;--gold-bg:#3a2e0e;--shadow:0 1px 2px rgba(0,0,0,.3)}
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;padding-bottom:calc(var(--navh) + env(safe-area-inset-bottom))}
+a{color:var(--accent)}
+h1,h2,h3{line-height:1.25;margin:0 0 .5em}
+h1{font-size:1.6rem;letter-spacing:-.01em}
+h2{font-size:1.3rem;letter-spacing:-.01em}
+h3{font-size:1.05rem}
+p{margin:0 0 .8em}
+button{font:inherit;color:inherit}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+header.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:12px;padding-top:10px;padding-bottom:10px}
+.brand{font-weight:700;font-size:1.05rem;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:8px;margin-right:auto}
+.brand .logo{width:28px;height:28px;border-radius:8px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:.9rem;font-weight:800}
+.chips{display:flex;gap:6px}
+.chip{font-size:.8rem;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--card);border:1px solid var(--line);white-space:nowrap}
+.chip.xp{color:var(--accent)} .chip.fire{color:var(--gold)}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+nav.tabs a{flex:1;text-align:center;text-decoration:none;color:var(--muted);font-size:.78rem;font-weight:600;padding:6px 2px;border-radius:10px;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav.tabs a svg{width:22px;height:22px}
+nav.tabs a.on{color:var(--accent);background:var(--accent-soft)}
+@media (min-width:760px){
+  body{padding-bottom:0}
+  nav.tabs{position:static;border:0;background:transparent;padding:0;gap:4px;flex:0 0 auto}
+  nav.tabs a{flex-direction:row;font-size:.88rem;padding:6px 10px;white-space:nowrap}
+  nav.tabs a svg{width:18px;height:18px}
+  header.top .wrap{flex-wrap:nowrap}
+  .chips{order:3}
+}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+.stack>*+*{margin-top:12px}
+.muted{color:var(--muted)}
+.small{font-size:.88rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:10px 18px;border-radius:12px;border:1px solid var(--line);background:var(--card);font-weight:600;cursor:pointer;text-decoration:none;color:var(--ink)}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent}
+.btn.danger{color:var(--bad);border-color:var(--bad)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,.flip:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row.end{justify-content:flex-end}
+.row.between{justify-content:space-between}
+.grow{flex:1}
+.hero h1{margin-bottom:.3em}
+.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .4s}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.stat{background:var(--bg);border-radius:12px;padding:10px;text-align:center}
+.stat b{display:block;font-size:1.3rem}
+.stat span{font-size:.78rem;color:var(--muted)}
+.levels{display:grid;gap:10px}
+@media (min-width:760px){.levels{grid-template-columns:1fr 1fr}}
+.lvl{display:flex;gap:14px;align-items:flex-start;text-decoration:none;color:inherit;cursor:pointer;transition:border-color .15s,transform .15s}
+.lvl:hover{border-color:var(--accent);transform:translateY(-1px)}
+.lvl .num{flex:0 0 44px;height:44px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:800;font-size:1.1rem}
+.lvl.done .num{background:var(--good-bg);color:var(--good)}
+.lvl.boss .num{background:var(--gold-bg);color:var(--gold)}
+.lvl h3{margin:0 0 2px}
+.lvl p{margin:0;font-size:.9rem;color:var(--muted)}
+.stars{color:var(--gold);letter-spacing:2px;font-size:.95rem}
+.stars .off{color:var(--line)}
+.status{font-size:.78rem;font-weight:600;margin-top:6px;color:var(--muted)}
+.status.ok{color:var(--good)}
+.badge{display:flex;gap:16px;align-items:center}
+.badge svg{flex:0 0 72px}
+.badge.locked svg{filter:grayscale(1);opacity:.4}
+.crumb{font-size:.9rem;text-decoration:none;color:var(--muted);display:inline-flex;align-items:center;gap:4px;margin-bottom:8px}
+.seg{display:flex;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px;margin:10px 0 14px}
+.seg button{flex:1;border:0;background:transparent;padding:9px 6px;border-radius:9px;font-weight:600;color:var(--muted);cursor:pointer;font-size:.92rem}
+.seg button.on{background:var(--accent);color:var(--accent-ink)}
+.lesson{min-height:340px;touch-action:pan-y}
+.lesson h2{margin-top:4px}
+.counter{font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.dots{display:flex;gap:6px;margin:6px 0 12px}
+.dots i{height:6px;flex:1;border-radius:9px;background:var(--line)}
+.dots i.on{background:var(--accent)}
+ul.defs{padding-left:1.1em;margin:0 0 .8em}
+ul.defs li{margin-bottom:.45em}
+ol.steps{padding-left:1.3em;margin:0 0 .8em}
+ol.steps li{margin-bottom:.6em}
+.example{background:var(--accent-soft);border-left:4px solid var(--accent);padding:10px 12px;border-radius:8px}
+.aside{background:var(--gold-bg);border-left:4px solid var(--gold);padding:10px 12px;border-radius:8px;font-size:.95rem}
+table.t{border-collapse:collapse;width:100%;margin:0 0 .8em;font-size:.93rem}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:7px 6px;text-align:left;vertical-align:top}
+table.t th{font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.tablewrap{overflow-x:auto}
+.navbtns{display:flex;gap:10px;margin-top:14px}
+.navbtns .btn{flex:1}
+.hint{font-size:.8rem;color:var(--muted);text-align:center;margin-top:8px}
+.cheat li{margin-bottom:.5em}
+.qhead{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;color:var(--muted);font-weight:600;margin-bottom:6px}
+.combo{color:var(--gold)}
+.qtext{font-size:1.1rem;font-weight:600;margin:6px 0 14px}
+.qtype{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);cursor:pointer;font-size:1rem;line-height:1.4;min-height:50px}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-bg)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opt .k{display:inline-block;width:1.6em;font-weight:700;color:var(--muted)}
+.match{display:grid;gap:10px}
+.mrow{display:grid;gap:6px;padding:10px;border:1.5px solid var(--line);border-radius:12px}
+.mrow b{font-size:.98rem}
+.mrow select{font:inherit;font-size:.95rem;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);width:100%}
+.mrow.right{border-color:var(--good);background:var(--good-bg)}
+.mrow.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.mrow .fix{font-size:.85rem;color:var(--good);font-weight:600}
+@media (min-width:760px){.mrow{grid-template-columns:200px 1fr;align-items:center}.mrow .fix{grid-column:2}}
+.fb{margin-top:14px;padding:12px 14px;border-radius:12px;font-size:.97rem}
+.fb.right{background:var(--good-bg);border:1px solid var(--good)}
+.fb.wrong{background:var(--bad-bg);border:1px solid var(--bad)}
+.fb strong{display:block;margin-bottom:2px}
+.result{text-align:center}
+.result .big{font-size:3rem;font-weight:800;line-height:1}
+.result .stars{font-size:1.8rem}
+.missed{text-align:left}
+.missed li{margin-bottom:.7em}
+.toast{position:fixed;left:50%;top:70px;transform:translateX(-50%) translateY(-20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;font-size:.92rem;opacity:0;transition:all .3s;z-index:50;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.search{width:100%;font:inherit;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.fchip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--muted)}
+.fchip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.glist{display:grid;gap:10px;grid-template-columns:1fr}
+@media (min-width:600px){.glist{grid-template-columns:1fr 1fr}}
+@media (min-width:860px){.glist{grid-template-columns:1fr 1fr 1fr}}
+.flip{perspective:1000px;cursor:pointer;border-radius:var(--radius)}
+.flip-in{display:grid;transition:transform .45s;transform-style:preserve-3d;min-height:150px}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+.face.back{transform:rotateY(180deg)}
+.face .term{font-weight:700;font-size:1.08rem;margin:auto 0}
+.face .def{font-size:.93rem;flex:1}
+.face .meta{display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:var(--muted);margin-top:8px;gap:6px}
+.known-btn{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:5px 10px;font-size:.78rem;font-weight:700;cursor:pointer}
+.known-btn.on{background:var(--good-bg);border-color:var(--good);color:var(--good)}
+.tag{font-size:.72rem;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:99px}
+.kdot{color:var(--good);font-weight:700}
+.drill .flip-in{min-height:240px}
+.drill .face .term{font-size:1.4rem;text-align:center}
+.drill .face .def{font-size:1.05rem;display:flex;align-items:center}
+.empty{text-align:center;padding:30px 10px;color:var(--muted)}
+footer.disc{max-width:860px;margin:10px auto 20px;padding:0 16px;font-size:.8rem;color:var(--muted)}
+.srcs li{margin-bottom:.4em;word-break:break-word}
+.scoreline{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92rem;background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:10px 12px;text-align:left;user-select:all}
+table.t td.num,table.t th.num{text-align:right;white-space:nowrap}
+.secbar{height:6px;background:var(--line);border-radius:9px;overflow:hidden;margin-top:4px}.secbar>i{display:block;height:100%;background:var(--accent)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="#home"><span class="logo">LB</span><span>Life Basics</span></a>
+  <nav class="tabs" id="tabs" aria-label="Main">
+    <a href="#home" data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z"/></svg>Learn</a>
+    <a href="#glossary" data-tab="glossary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/></svg>Flashcards</a>
+    <a href="#bridge" data-tab="bridge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 18h20M4 18V9m16 9V9M2 9c4 0 6-4 10-4s6 4 10 4M8 18v-5m8 5v-5"/></svg>Exam</a>
+    <a href="#about" data-tab="about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg>About</a>
+  </nav>
+  <div class="chips"><span class="chip xp" id="xpChip">0 XP</span><span class="chip fire" id="dayChip" title="Days in a row you've studied">0 day streak</span></div>
+</div></header>
+<main class="wrap" id="app" tabindex="-1"></main>
+<footer class="disc">Study aid only. Not legal or tax advice. Built from the Pearson VUE NC Life Agent content outline (effective March 2, 2026) and NC statutes and rules as read in October 2026. Laws change: confirm with the NC Department of Insurance (ncdoi.gov) and the current Pearson VUE candidate handbook.</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="content.js"></script>
+<script>
+"use strict";
+/* ---------- STATE ---------- */
+const $ = s => document.querySelector(s);
+const app = $("#app");
+const KEY = "lifeBasics.v1";
+const PASS = 70;
+const PRAISE = ["Correct.","Yep, that's it.","Nailed it.","Right."];
+const OOPS = ["Not quite.","Close, but no.","Nope."];
+function defaults(){ return {xp:0, levels:{}, final:null, known:{}, kx:{}, day:{count:0,last:null}, bestCombo:0}; }
+function load(){ try{ const raw = localStorage.getItem(KEY); return raw ? Object.assign(defaults(), JSON.parse(raw)) : defaults(); } catch(e){ return defaults(); } }
+let S = load();
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} updateChips(); }
+function blankRec(){ return {best:0, bestCorrect:0, stars:0, done:false, attempts:0, cardMax:-1}; }
+function lv(id){ return S.levels[id] || (S.levels[id] = blankRec()); }
+function ymd(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function yesterday(){ const d = new Date(); d.setDate(d.getDate()-1); return ymd(d); }
+function touchDay(){ const t = ymd(new Date()); if(S.day.last === t) return; S.day.count = (S.day.last === yesterday()) ? S.day.count+1 : 1; S.day.last = t; save(); }
+function dayStreak(){ if(!S.day.last) return 0; return (S.day.last === ymd(new Date()) || S.day.last === yesterday()) ? S.day.count : 0; }
+function updateChips(){ $("#xpChip").textContent = S.xp+" XP"; const d = dayStreak(); $("#dayChip").textContent = d+" day streak"; }
+function toast(m){ const t = $("#toast"); t.textContent = m; t.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(()=>t.classList.remove("show"), 1900); }
+function esc(s){ return String(s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function shuffle(a){ a = a.slice(); for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
+function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+function starsFor(p){ return p>=100?3 : p>=85?2 : p>=PASS?1 : 0; }
+function starsHtml(n){ let s=""; for(let i=0;i<3;i++) s += i<n ? "★" : '<span class="off">★</span>'; return '<span class="stars" role="img" aria-label="'+n+' of 3 stars">'+s+'</span>'; }
+function allDone(){ return LEVELS.every(l=>lv(l.id).done) && !!(S.final && S.final.done); }
+const FINAL_COUNT = OUTLINE.reduce((a,o)=>a+o.n,0); /* 55, weighted like the real exam */
+const SEC_NAME = Object.fromEntries(OUTLINE.map(o=>[o.sec,o.name]));
+function lvName(l){ return "Level "+(l.id+1); }
+
+/* ---------- ROUTER ---------- */
+let view = {name:"home"};
+let Q = null;
+function route(){
+  const h = (location.hash || "#home").slice(1);
+  const m = h.match(/^level-(\d+)$/);
+  if(m && LEVELS[+m[1]]){
+    const id = +m[1];
+    if(!(view.name==="level" && view.id===id)){
+      const L = lv(id);
+      view = {name:"level", id, tab:"learn", card: L.done ? 0 : Math.max(0, Math.min(L.cardMax, LEVELS[id].cards.length-1))};
+      Q = null;
+    }
+  } else if(h==="final"){
+    if(view.name!=="final"){ view = {name:"final"}; Q = null; }
+  } else {
+    view = {name: ["glossary","bridge","about"].includes(h) ? h : "home"};
+  }
+  render();
+  window.scrollTo(0,0);
+}
+function render(){
+  const tab = (view.name==="level"||view.name==="final") ? "home" : view.name;
+  document.querySelectorAll("#tabs a").forEach(a=>{ const on = a.dataset.tab===tab; a.classList.toggle("on", on); if(on) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+  ({home:renderHome, level:renderLevel, final:renderFinal, glossary:renderGlossary, bridge:renderBridge, about:renderAbout})[view.name]();
+  updateChips();
+}
+
+/* ---------- HOME ---------- */
+function badgeSvg(){ return `<svg viewBox="0 0 72 72" width="72" height="72" aria-hidden="true"><defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f2c14e"/><stop offset="1" stop-color="#b07800"/></linearGradient></defs><path d="M36 3 64 19v34L36 69 8 53V19z" fill="url(#bg1)"/><path d="M36 11 57 23v26L36 61 15 49V23z" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2"/><path d="M25 37l8 8 15-17" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`; }
+function levelTile(l){
+  const L = lv(l.id);
+  const status = L.done ? `<div class="status ok">Passed · best ${L.best}%</div>`
+    : L.attempts ? `<div class="status">Best ${L.best}%. ${PASS}% passes</div>`
+    : L.cardMax>=0 ? `<div class="status">In progress · card ${Math.min(L.cardMax+1,l.cards.length)} of ${l.cards.length}</div>`
+    : `<div class="status">${l.cards.length} cards · ${l.quiz.length} questions</div>`;
+  return `<a class="card lvl ${L.done?"done":""}" href="#level-${l.id}"><span class="num" aria-hidden="true">${L.done?"✓":l.id+1}</span><div class="grow"><h3>${lvName(l)}: ${esc(l.title)}</h3><p><span class="tag">Outline ${l.sec} · ${OUTLINE.find(o=>o.sec===l.sec).n} exam Qs</span> ${esc(l.sub)}</p>${starsHtml(L.stars)}${status}</div></a>`;
+}
+function bossTile(){
+  const F = S.final;
+  const status = F && F.done ? `<div class="status ok">Passed · best ${F.best}%</div>` : F && F.attempts ? `<div class="status">Best ${F.best}%. ${PASS}% passes</div>` : `<div class="status">${FINAL_COUNT} questions, weighted like the real exam</div>`;
+  return `<a class="card lvl boss ${F&&F.done?"done":""}" href="#final"><span class="num" aria-hidden="true">★</span><div class="grow"><h3>Practice Exam</h3><p>55 mixed questions: 17 / 5 / 11 / 8 / 14 by outline section</p>${starsHtml(F?F.stars:0)}${status}</div></a>`;
+}
+function renderHome(){
+  const done = LEVELS.filter(l=>lv(l.id).done).length;
+  const fdone = !!(S.final && S.final.done);
+  const totalStars = LEVELS.reduce((a,l)=>a+lv(l.id).stars,0) + (S.final ? S.final.stars : 0);
+  const known = GLOSSARY.filter(g=>S.known[g[0]]).length;
+  const pct = Math.round((done + (fdone?1:0)) / (LEVELS.length+1) * 100);
+  const next = LEVELS.find(l=>!lv(l.id).done);
+  const badge = allDone();
+  let cta = "";
+  if(next) cta = `<a class="btn primary grow" href="#level-${next.id}">${lv(next.id).cardMax>=0?"Continue":"Start"} ${lvName(next)}: ${esc(next.title)}</a>`;
+  else if(!fdone) cta = `<a class="btn primary grow" href="#final">Take the Practice Exam</a>`;
+  else cta = `<a class="btn primary grow" href="#bridge">Review the exam outline</a>`;
+  app.innerHTML = `
+  <section class="card hero">
+    <h1>NC Life Agent exam: the life side</h1>
+    <p class="muted">Nine levels that follow Pearson VUE's official NC Life Agent outline. Each has study cards, a cheat sheet with exam traps and mnemonics, and a quiz. Then a 55-question practice exam weighted like the real one.</p>
+    <div class="row between small"><span>${done} of ${LEVELS.length} levels passed${fdone?" + Practice Exam":""}</span><span>${pct}%</span></div>
+    <div class="bar" role="progressbar" aria-label="Course progress" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div>
+    <div class="stats">
+      <div class="stat"><b>${S.xp}</b><span>XP</span></div>
+      <div class="stat"><b>${totalStars}/${(LEVELS.length+1)*3}</b><span>Stars</span></div>
+      <div class="stat"><b>${known}/${GLOSSARY.length}</b><span>Terms known</span></div>
+    </div>
+    <div class="row" style="margin-top:14px">${cta}</div>
+  </section>
+  <section class="card badge ${badge?"":"locked"}" style="margin-top:12px">${badgeSvg()}<div><h3 style="margin:0 0 4px">${badge?"Exam ready":"Exam-ready badge"}</h3><p class="small muted" style="margin:0">${badge?"Every level and the Practice Exam passed. Aim for 80%+ on a couple of fresh practice exams, then book your seat.":"Pass all 9 levels and the Practice Exam at 70% or better to earn it."}</p></div></section>
+  <h2 style="margin:20px 0 10px">Levels</h2>
+  <div class="levels">${LEVELS.map(levelTile).join("")}${bossTile()}</div>
+  <div class="row" style="margin-top:14px"><a class="btn grow" href="#glossary">Flashcards (${GLOSSARY.length} terms)</a><a class="btn grow" href="#bridge">Exam outline and weights</a></div>`;
+}
+
+/* ---------- LEVEL ---------- */
+function renderLevel(){
+  const l = LEVELS[view.id], L = lv(l.id);
+  const names = {learn:"Learn", cheat:"Cheat sheet", quiz:"Quiz"};
+  const tabs = `<div class="seg" role="tablist">${["learn","cheat","quiz"].map(t=>`<button role="tab" aria-selected="${view.tab===t}" class="${view.tab===t?"on":""}" data-act="tab" data-tab="${t}">${names[t]}</button>`).join("")}</div>`;
+  const body = view.tab==="learn" ? learnHtml(l) : view.tab==="cheat" ? cheatHtml(l) : quizHtml();
+  app.innerHTML = `<a class="crumb" href="#home">← Level map</a>
+  <div class="row between"><div><div class="counter">${lvName(l)} · Outline section ${l.sec}</div><h1 style="margin:0">${esc(l.title)}</h1></div>${starsHtml(L.stars)}</div>
+  ${tabs}<div id="pane">${body}</div>`;
+  if(view.tab==="learn"){ markCard(); bindSwipe(); }
+}
+function learnHtml(l){
+  const i = view.card, c = l.cards[i], n = l.cards.length, last = i===n-1;
+  return `<article class="card lesson" id="lesson"><div class="counter">Card ${i+1} of ${n}</div>
+  <div class="dots" aria-hidden="true">${l.cards.map((_,k)=>`<i class="${k<=i?"on":""}"></i>`).join("")}</div>
+  <h2>${esc(c.h)}</h2>${c.b}</article>
+  <div class="navbtns"><button class="btn" data-act="prev" ${i===0?"disabled":""}>← Back</button><button class="btn primary" data-act="next">${last?"Cheat sheet →":"Next →"}</button></div>
+  <p class="hint">Swipe the card or use the ← → keys</p>`;
+}
+function markCard(){ const L = lv(view.id); if(view.card > L.cardMax){ S.xp += 2*(view.card - L.cardMax); L.cardMax = view.card; touchDay(); save(); } }
+function nextCard(){ const n = LEVELS[view.id].cards.length; if(view.card < n-1){ view.card++; } else { view.tab = "cheat"; } render(); scrollToPane(); }
+function prevCard(){ if(view.card>0){ view.card--; render(); scrollToPane(); } }
+function scrollToPane(){ const p = $("#pane"); if(p && p.getBoundingClientRect().top < 0) p.scrollIntoView({block:"start"}); }
+function bindSwipe(){
+  const el = $("#lesson"); if(!el) return;
+  let x0=null, y0=null;
+  el.addEventListener("touchstart", e=>{ x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, {passive:true});
+  el.addEventListener("touchend", e=>{ if(x0===null) return; const dx = e.changedTouches[0].clientX-x0, dy = e.changedTouches[0].clientY-y0; x0=null; if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.5){ dx<0 ? nextCard() : prevCard(); } }, {passive:true});
+}
+function cheatHtml(l){
+  return `<section class="card"><h2>${lvName(l)} cheat sheet</h2>${l.cheatHtml||""}<ul class="cheat">${l.cheat.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></section>
+  <div class="navbtns"><button class="btn" data-act="tab" data-tab="learn">Review cards</button><button class="btn primary" data-act="tab" data-tab="quiz">Take the quiz →</button></div>`;
+}
+
+/* ---------- QUIZ ---------- */
+function prepQ(q){
+  if(q.t==="mc") return Object.assign({}, q, {items: shuffle(q.o.map((t,k)=>({t, ok:k===0}))), picked:null, result:null});
+  return Object.assign({}, q, {defs: shuffle(q.pairs.map(p=>p[1])), sel: q.pairs.map(()=>""), checked:false, result:null});
+}
+function startQuiz(){
+  let qs;
+  if(view.name==="final"){
+    qs = [];
+    OUTLINE.forEach(o=>{
+      const pool = [];
+      LEVELS.filter(l=>l.sec===o.sec).forEach(l=>l.quiz.forEach(q=>pool.push(Object.assign({sec:l.sec}, q))));
+      FINAL_EXTRA.filter(q=>q.sec===o.sec).forEach(q=>pool.push(q));
+      qs.push(...shuffle(pool).slice(0, o.n));
+    });
+    qs = shuffle(qs);
+  }
+  else qs = LEVELS[view.id].quiz.map(q=>Object.assign({sec:LEVELS[view.id].sec}, q));
+  Q = {final: view.name==="final", qs: qs.map(prepQ), i:0, correct:0, combo:0, maxCombo:0, done:false, missed:[]};
+}
+function quizHtml(){
+  const isF = view.name==="final";
+  if(!Q){
+    const n = isF ? FINAL_COUNT : LEVELS[view.id].quiz.length;
+    const rec = isF ? S.final : lv(view.id);
+    return `<section class="card stack"><h2 style="margin:0">${isF?"Practice Exam":"Quiz"}: ${n} questions</h2>
+    <p>${isF?"Drawn fresh each time, weighted like the real NC Life Agent exam: 17 types of policies, 5 annuities, 11 provisions, 8 other life topics, 14 NC law. You get a section-by-section breakdown at the end. ":""}Instant feedback and a short "why" after every answer. ${PASS}% passes here. The real exam reports a scaled score where 70 passes, which isn't the same as 70% correct, so aim for 80%+. 85% earns 2 stars, 100% earns 3.</p>
+    ${rec && rec.attempts ? `<p class="muted small">Your best so far: ${rec.best}%.</p>` : ""}
+    <button class="btn primary" data-act="start">Start ${isF?"the Practice Exam":"the quiz"}</button></section>`;
+  }
+  if(Q.done) return resultHtml();
+  const q = Q.qs[Q.i], n = Q.qs.length;
+  const answered = q.result !== null;
+  let inner = "";
+  if(q.t==="mc"){
+    inner = `<div class="opts">${q.items.map((it,k)=>{ let cls = "opt"; if(answered){ if(it.ok) cls += " right"; else if(k===q.picked) cls += " wrong"; }
+      return `<button class="${cls}" data-act="pick" data-k="${k}" ${answered?"disabled":""}><span class="k">${"ABCD"[k]}</span>${esc(it.t)}</button>`; }).join("")}</div>`;
+  } else {
+    inner = `<div class="match">${q.pairs.map((p,r)=>{ let cls = "mrow", fix = "";
+      if(q.checked){ const ok = q.sel[r]===p[1]; cls += ok ? " right" : " wrong"; if(!ok) fix = `<span class="fix">Answer: ${esc(p[1])}</span>`; }
+      return `<div class="${cls}"><b id="mt${r}">${esc(p[0])}</b><select data-row="${r}" aria-labelledby="mt${r}" ${q.checked?"disabled":""}><option value="">Choose a match...</option>${q.defs.map(d=>`<option value="${esc(d)}" ${q.sel[r]===d?"selected":""}>${esc(d)}</option>`).join("")}</select>${fix}</div>`; }).join("")}</div>
+      ${q.checked ? "" : `<div class="row end" style="margin-top:12px"><button class="btn primary" data-act="check" ${q.sel.every(Boolean)?"":"disabled"}>Check answers</button></div>`}`;
+  }
+  const fb = answered ? `<div class="fb ${q.result?"right":"wrong"}" role="status"><strong>${esc(q.head)}</strong>${esc(q.why)}</div>
+    <div class="row end" style="margin-top:12px"><button class="btn primary" data-act="nextq" id="nextq">${Q.i===n-1?"See results":"Next question →"}</button></div>` : "";
+  return `<section class="card" id="qcard"><div class="qhead"><span>Question ${Q.i+1} of ${n}</span><span class="combo">${Q.combo>=2?Q.combo+" in a row":""}</span></div>
+  <div class="bar" style="height:6px"><i style="width:${(Q.i/n)*100}%"></i></div>
+  <div class="qtype" style="margin-top:12px">${q.t==="match"?"Match the terms":(q.tag||"Multiple choice")}${isF&&q.sec?" · Section "+q.sec:""}</div>
+  <div class="qtext">${esc(q.q)}</div>${inner}${fb}</section>`;
+}
+function answer(ok){
+  const q = Q.qs[Q.i];
+  q.result = ok; q.head = ok ? pick(PRAISE) : pick(OOPS);
+  if(ok){ Q.correct++; Q.combo++; Q.maxCombo = Math.max(Q.maxCombo, Q.combo); if([3,5,8,12].includes(Q.combo)) toast(Q.combo+" in a row"); }
+  else { Q.combo = 0; Q.missed.push(q); }
+  touchDay(); render();
+  const nb = $("#nextq"); if(nb){ nb.focus({preventScroll:true}); const fb = $(".fb"); if(fb) fb.scrollIntoView({block:"nearest"}); }
+}
+function finishQuiz(){
+  Q.done = true;
+  const n = Q.qs.length, pct = Math.round(Q.correct/n*100), stars = starsFor(pct);
+  let rec; if(Q.final){ S.final = S.final || blankRec(); rec = S.final; } else rec = lv(view.id);
+  const wasDone = rec.done;
+  let gain = Math.max(0, Q.correct - rec.bestCorrect) * 10;
+  rec.attempts++; rec.best = Math.max(rec.best, pct); rec.bestCorrect = Math.max(rec.bestCorrect, Q.correct); rec.stars = Math.max(rec.stars, stars);
+  if(pct >= PASS) rec.done = true;
+  Q.newPass = !wasDone && rec.done;
+  if(Q.newPass) gain += Q.final ? 100 : 50;
+  S.bestCombo = Math.max(S.bestCombo, Q.maxCombo);
+  S.xp += gain; Q.pct = pct; Q.stars = stars; Q.gain = gain; Q.when = new Date();
+  save();
+  if(gain) toast("+"+gain+" XP");
+  if(Q.newPass && allDone()) setTimeout(()=>toast("Badge earned: Exam ready"), 2000);
+}
+function resultHtml(){
+  const pass = Q.pct >= PASS, isF = Q.final;
+  const lastLevel = !isF && view.id === LEVELS.length-1;
+  const nextL = !isF && !lastLevel ? LEVELS[view.id+1] : null;
+  let primary = `<a class="btn primary" href="#home">Level map</a>`;
+  if(pass && nextL) primary = `<a class="btn primary" href="#level-${nextL.id}">${lvName(nextL)} →</a>`;
+  else if(pass && lastLevel) primary = `<a class="btn primary" href="#final">Practice Exam →</a>`;
+  else if(pass && isF) primary = `<a class="btn primary" href="#bridge">Exam outline →</a>`;
+  const msg = pass ? (Q.pct===100 ? "Perfect score." : "Passed.") : `${PASS}% passes. Skim the cheat sheet and run it again.`;
+  const label = isF ? "Practice Exam" : lvName(LEVELS[view.id])+" quiz ("+LEVELS[view.id].title+")";
+  const when = Q.when ? Q.when.toLocaleDateString(undefined,{month:"short",day:"numeric"})+" "+Q.when.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"}) : "";
+  let secs = "", secLine = "";
+  if(isF){
+    const by = OUTLINE.map(o=>{ const qs = Q.qs.filter(q=>q.sec===o.sec); const c = qs.filter(q=>q.result).length; return {o, c, n:qs.length}; });
+    secLine = " | " + by.map(b=>b.o.sec+" "+b.c+"/"+b.n).join(", ");
+    secs = `<div class="tablewrap" style="text-align:left"><h3>By outline section</h3><table class="t" id="secTable"><tr><th>Section</th><th class="num">Score</th></tr>${by.map(b=>{ const p = b.n?Math.round(b.c/b.n*100):0; return `<tr><td><b>${b.o.sec}.</b> ${esc(b.o.name)}<div class="secbar"><i style="width:${p}%"></i></div></td><td class="num">${b.c}/${b.n} (${p}%)</td></tr>`; }).join("")}</table></div>`;
+  }
+  const line = `${label}: ${Q.correct}/${Q.qs.length} (${Q.pct}%)${secLine} | ${when}`;
+  return `<section class="card result stack"><div class="big">${Q.pct}%</div><div>${starsHtml(Q.stars)}</div>
+  <p><b>${Q.correct} of ${Q.qs.length} correct.</b> ${msg}</p>
+  <div><p class="small muted" style="margin:0 0 4px">Score to report in chat:</p><div class="scoreline" id="scoreLine">${esc(line)}</div></div>
+  ${secs}
+  <p class="muted small">+${Q.gain} XP${Q.gain===0?" (XP only counts when you beat your best score)":""} · Longest streak this round: ${Q.maxCombo}</p>
+  ${Q.missed.length ? `<div class="missed"><h3>Review what you missed</h3><ul>${Q.missed.map(q=>`<li><b>${esc(q.q)}</b><br>${q.t==="mc" ? "Answer: "+esc(q.o[0])+". " : "Answers: "+q.pairs.map(p=>esc(p[0])+" = "+esc(p[1])).join("; ")+". "}<span class="muted">${esc(q.why)}</span></li>`).join("")}</ul></div>` : ""}
+  <div class="row" style="justify-content:center"><button class="btn" data-act="retry">Retry</button>${isF?"":`<button class="btn" data-act="tab" data-tab="cheat">Cheat sheet</button>`}${primary}</div></section>`;
+}
+function renderFinal(){
+  const F = S.final;
+  app.innerHTML = `<a class="crumb" href="#home">← Level map</a>
+  <div class="row between"><div><div class="counter">Weighted like the real exam</div><h1 style="margin:0">Practice Exam</h1></div>${starsHtml(F?F.stars:0)}</div>
+  <div id="pane" style="margin-top:14px">${quizHtml()}</div>`;
+}
+
+/* ---------- GLOSSARY ---------- */
+const gl = {q:"", filter:"all", level:"all", mode:"grid", flipped:{}, deck:[], di:0, dflip:false};
+function glItems(){
+  const q = gl.q.trim().toLowerCase();
+  let items = GLOSSARY.map((g,i)=>({term:g[0], def:g[1], lvl:g[2], i})).filter(x=>
+    (gl.level==="all" || x.lvl===+gl.level) &&
+    (gl.filter==="all" || (gl.filter==="known" ? !!S.known[x.term] : !S.known[x.term])) &&
+    (!q || x.term.toLowerCase().includes(q) || x.def.toLowerCase().includes(q)));
+  if(q) items.sort((a,b)=> (b.term.toLowerCase().includes(q)) - (a.term.toLowerCase().includes(q)));
+  return items;
+}
+function renderGlossary(){
+  const known = GLOSSARY.filter(g=>S.known[g[0]]).length;
+  const chip = (k,v,label)=>`<button class="fchip ${gl[k]===v?"on":""}" data-act="glset" data-k="${k}" data-v="${v}">${label}</button>`;
+  app.innerHTML = `<div class="row between"><h1 style="margin:0">Flashcards</h1><span class="small muted" id="glcount">${known} of ${GLOSSARY.length} known</span></div>
+  <p class="muted small" style="margin-top:6px">Every term defined in the course. Tap a card to flip it. Mark the ones you've got.</p>
+  <input class="search" id="glq" type="search" placeholder="Search terms or definitions" aria-label="Search glossary" value="${esc(gl.q)}">
+  <div class="filters">${chip("filter","all","All")}${chip("filter","learn","Still learning")}${chip("filter","known","Known")}</div>
+  <div class="filters">${chip("level","all","All levels")}${LEVELS.map(l=>chip("level",String(l.id),"L"+(l.id+1))).join("")}</div>
+  <div class="seg" style="margin-top:4px"><button class="${gl.mode==="grid"?"on":""}" data-act="glmode" data-v="grid">Browse</button><button class="${gl.mode==="drill"?"on":""}" data-act="glmode" data-v="drill">Drill one at a time</button></div>
+  <div id="gllist"></div>`;
+  $("#glq").addEventListener("input", e=>{ gl.q = e.target.value; if(gl.mode==="drill") newDeck(); fillGlossary(); });
+  if(gl.mode==="drill" && !gl.deck.length) newDeck();
+  fillGlossary();
+}
+function newDeck(){ gl.deck = shuffle(glItems()); gl.di = 0; gl.dflip = false; }
+function fillGlossary(){
+  const box = $("#gllist"); if(!box) return;
+  const known = GLOSSARY.filter(g=>S.known[g[0]]).length;
+  $("#glcount").textContent = known+" of "+GLOSSARY.length+" known";
+  if(gl.mode==="grid"){
+    const items = glItems();
+    if(!items.length){ box.innerHTML = `<div class="empty">No terms match. Try another search or filter.</div>`; return; }
+    box.innerHTML = `<p class="small muted">${items.length} term${items.length===1?"":"s"}</p><div class="glist">${items.map(cardHtml).join("")}</div>`;
+  } else {
+    const d = gl.deck;
+    if(!d.length){ box.innerHTML = `<div class="empty">No cards in this deck. Change the filter above.</div>`; return; }
+    if(gl.di >= d.length){ box.innerHTML = `<div class="card empty"><h3>Deck done</h3><p>You went through ${d.length} card${d.length===1?"":"s"}.</p><button class="btn primary" data-act="redeck">Shuffle and go again</button></div>`; return; }
+    const x = d[gl.di], k = !!S.known[x.term];
+    box.innerHTML = `<p class="small muted">Card ${gl.di+1} of ${d.length}</p>
+    <div class="drill"><div class="flip ${gl.dflip?"on":""}" tabindex="0" role="button" aria-label="Flashcard: ${esc(x.term)}. Press to flip." data-act="dflip"><div class="flip-in">
+      <div class="face front"><span class="tag" style="align-self:flex-start">Level ${x.lvl+1}</span><div class="term">${esc(x.term)}</div><div class="meta"><span>Tap to see the definition</span>${k?'<span class="kdot">✓ Known</span>':""}</div></div>
+      <div class="face back"><div class="def">${esc(x.def)}</div><div class="meta"><span class="tag">${esc(x.term)}</span></div></div>
+    </div></div></div>
+    <div class="navbtns"><button class="btn" data-act="dnext">Still learning</button><button class="btn primary" data-act="dgot">Got it ✓</button></div>`;
+  }
+}
+function cardHtml(x){
+  const k = !!S.known[x.term], f = !!gl.flipped[x.i];
+  return `<div class="flip ${f?"on":""}" tabindex="0" role="button" aria-label="${esc(x.term)}. Press to flip." data-act="flip" data-i="${x.i}"><div class="flip-in">
+    <div class="face front"><div class="meta" style="margin:0 0 6px"><span class="tag">L${x.lvl+1}</span>${k?'<span class="kdot">✓ Known</span>':""}</div><div class="term">${esc(x.term)}</div><div class="meta"><span>Tap to flip</span></div></div>
+    <div class="face back"><div class="def">${esc(x.def)}</div><div class="meta"><span class="tag">${esc(x.term)}</span><button class="known-btn ${k?"on":""}" data-act="known" data-term="${esc(x.term)}" aria-pressed="${k}">${k?"✓ Known":"Mark as known"}</button></div></div>
+  </div></div>`;
+}
+function setKnown(term, val){
+  S.known[term] = val;
+  if(!val) delete S.known[term];
+  if(val && !S.kx[term]){ S.kx[term] = 1; S.xp += 1; }
+  touchDay(); save();
+}
+
+/* ---------- EXAM ---------- */
+function renderBridge(){
+  const lvLinks = ids => ids.map(i=>`<a href="#level-${i}">${lvName(LEVELS[i])}</a>`).join(", ");
+  app.innerHTML = `<h1>The exam</h1>
+  <section class="card stack">
+    <h2 style="margin:0">NC Life Agent exam at a glance</h2>
+    <ul class="defs">
+      <li>Run by Pearson VUE. Apply on NIPR first; Pearson VUE then emails your authorization to schedule. You must pass before your NIPR application's end date (6-month eligibility).</li>
+      <li><b>55 scored</b> four-option multiple-choice questions, plus up to 5 unscored pretest questions you can't tell apart.</li>
+      <li><b>1 hour 15 minutes</b> for both parts. It's a <b>two-part</b> exam (general + NC law) but the parts are <b>scored together</b>: you need one overall passing score, not a pass on each part.</li>
+      <li>Pass = <b>scaled score of 70</b>. That's not 70% correct; forms are equated for difficulty. Failing score reports show a numeric score and weak areas. You can rebook after 24 hours.</li>
+      <li>$45 per attempt. Bring two forms of ID with signatures; the name must match your registration exactly.</li>
+      <li>No prelicensing course is required (since Oct 1, 2025). The exam is.</li>
+    </ul>
+  </section>
+  <section class="card" style="margin-top:12px">
+    <h2>Official outline and where to study it</h2>
+    <p class="small muted">Pearson VUE NC Insurance Content Outlines, Life Agent, effective March 2, 2026. Numbers are scored questions out of 55. The life outline is unchanged in substance from the March 15, 2024 version.</p>
+    <div class="tablewrap"><table class="t"><tr><th>Section</th><th class="num">Qs</th><th>Covers</th><th>Here</th></tr>
+    ${OUTLINE.map(o=>`<tr><td><b>${o.sec}. ${esc(o.name)}</b></td><td class="num">${o.n} <span class="muted small">(${Math.round(o.n/55*100)}%)</span></td><td>${esc(o.covers)}</td><td>${lvLinks(o.levels)}</td></tr>`).join("")}</table></div>
+    <p class="aside">Life products, provisions, and NC law are 45 of 55 questions. Annuities are only 5. NC law alone (14) is a quarter of the exam, so don't skip Levels 8 and 9.</p>
+  </section>
+  <section class="card" style="margin-top:12px">
+    <h2>A simple plan</h2>
+    <ol class="steps">
+      <li>Work through Levels 1 to 9 in order. Read the cards, skim the cheat sheet, take the quiz. Retry anything under 80%.</li>
+      <li>Take the Practice Exam. It draws a fresh, weighted set each time. Note the section breakdown and go back to the weakest level.</li>
+      <li>When you're scoring 80%+ on two or three fresh practice exams, book your seat.</li>
+      <li>Use the Flashcards tab for quick drills the day before.</li>
+    </ol>
+  </section>`;
+}
+
+/* ---------- ABOUT ---------- */
+function renderAbout(){
+  const totalQ = LEVELS.reduce((a,l)=>a+l.quiz.length,0) + FINAL_EXTRA.length;
+  app.innerHTML = `<h1>About</h1>
+  <section class="card stack">
+    <p>Built for Austin's NC Life Agent exam. It covers the life insurance side of Pearson VUE's official outline, with a short annuity review sized to its 5 exam questions.</p>
+    <p>${LEVELS.length} levels, ${LEVELS.reduce((a,l)=>a+l.cards.length,0)} study cards, ${totalQ} questions in the bank (the Practice Exam draws ${FINAL_COUNT}, weighted by section), and ${GLOSSARY.length} flashcard terms.</p>
+    <h3>How progress works</h3>
+    <ul class="defs">
+      <li>Scores, XP, and known terms are saved only in this browser (localStorage). Nothing is sent anywhere. Clearing site data or switching browsers starts fresh.</li>
+      <li>Every quiz and practice exam ends with a "Score to report" line you can copy into chat.</li>
+      <li>Stars: 70% = 1, 85% = 2, 100% = 3. XP and the day streak are just for fun.</li>
+    </ul>
+    <div><button class="btn danger" data-act="reset">Reset all progress</button></div>
+  </section>
+  <section class="card" style="margin-top:12px">
+    <h2>Sources</h2>
+    <p class="small muted">The outline comes from Pearson VUE. NC facts come from the General Statutes (ncleg.gov) and the NC Administrative Code, read in October 2026. Federal tax and Social Security points come from IRS, U.S. Code, and SSA pages. Rules change, so confirm with NC DOI before relying on anything here.</p>
+    <ul class="srcs small">${SOURCES.map(s=>`<li>${esc(s[0])}<br><a href="${esc(s[1])}" target="_blank" rel="noopener">${esc(s[1])}</a></li>`).join("")}</ul>
+  </section>
+  <section class="card" style="margin-top:12px">
+    <h2>Disclaimer</h2>
+    <p class="small">Study aid only. Not legal or tax advice, and not affiliated with Pearson VUE or the NC Department of Insurance. Practice questions are written to the outline; they aren't real exam questions.</p>
+  </section>`;
+}
+
+/* ---------- EVENTS ---------- */
+app.addEventListener("click", e=>{
+  const t = e.target.closest("[data-act]"); if(!t) return;
+  const a = t.dataset.act;
+  switch(a){
+    case "tab": view.tab = t.dataset.tab; if(view.tab==="quiz" && Q && Q.done) Q = null; render(); window.scrollTo(0,0); break;
+    case "next": nextCard(); break;
+    case "prev": prevCard(); break;
+    case "start": case "retry": startQuiz(); render(); window.scrollTo(0,0); break;
+    case "pick": { const q = Q.qs[Q.i]; if(q.result!==null) return; q.picked = +t.dataset.k; answer(q.items[q.picked].ok); break; }
+    case "check": { const q = Q.qs[Q.i]; if(!q.sel.every(Boolean)) return; q.checked = true; answer(q.pairs.every((p,r)=>q.sel[r]===p[1])); break; }
+    case "nextq": if(Q.i < Q.qs.length-1){ Q.i++; } else { finishQuiz(); } render(); scrollToPane(); { const c = $("#qcard .opt, #qcard select, .result .btn"); if(c) c.focus({preventScroll:true}); } break;
+    case "glset": gl[t.dataset.k] = t.dataset.v; if(gl.mode==="drill") newDeck(); renderGlossary(); break;
+    case "glmode": gl.mode = t.dataset.v; if(gl.mode==="drill") newDeck(); renderGlossary(); break;
+    case "flip": { const i = +t.dataset.i; gl.flipped[i] = !gl.flipped[i]; t.classList.toggle("on", gl.flipped[i]); break; }
+    case "known": { e.stopPropagation(); const term = t.dataset.term; setKnown(term, !S.known[term]); fillGlossary(); break; }
+    case "dflip": gl.dflip = !gl.dflip; t.classList.toggle("on", gl.dflip); break;
+    case "dnext": gl.di++; gl.dflip = false; fillGlossary(); break;
+    case "dgot": setKnown(gl.deck[gl.di].term, true); gl.di++; gl.dflip = false; fillGlossary(); break;
+    case "redeck": newDeck(); fillGlossary(); break;
+    case "reset": if(confirm("Reset all progress, scores, XP, and known terms? This can't be undone.")){ localStorage.removeItem(KEY); S = defaults(); Q = null; gl.flipped = {}; gl.deck = []; toast("Progress reset"); location.hash = "#home"; route(); } break;
+  }
+});
+app.addEventListener("change", e=>{
+  const s = e.target.closest("select[data-row]"); if(!s || !Q) return;
+  const q = Q.qs[Q.i]; q.sel[+s.dataset.row] = s.value;
+  const b = app.querySelector('[data-act="check"]'); if(b) b.disabled = !q.sel.every(Boolean);
+});
+app.addEventListener("keydown", e=>{
+  const t = e.target;
+  if((e.key==="Enter" || e.key===" ") && t.classList && t.classList.contains("flip")){ e.preventDefault(); t.click(); }
+});
+document.addEventListener("keydown", e=>{
+  if(view.name!=="level" || view.tab!=="learn") return;
+  if(/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)) return;
+  if(e.key==="ArrowRight") nextCard(); else if(e.key==="ArrowLeft") prevCard();
+});
+window.addEventListener("hashchange", route);
+window.LB = {LEVELS, GLOSSARY, FINAL_EXTRA, OUTLINE, get S(){ return S; }, get Q(){ return Q; }};
+route();
+</script>
+</body>
+</html>
